@@ -1,7 +1,7 @@
 import assert from 'assert'
 import _ from 'lodash'
 
-import store from '../store'
+import dispatcher from '../dispatcher'
 import WebApiClient from '../clients/WebApiClient'
 import { success, reject, fails } from './Convention'
 
@@ -13,7 +13,7 @@ function Query(type, ...args) {
   let method = WebApiClient[type]
   let key = JSON.stringify(query)
   if (!_.isFunction(method) || key in _inprogress) {
-    store.dispatch({
+    dispatcher.dispatch({
       ...query,
       type: reject(type),
     })
@@ -21,17 +21,17 @@ function Query(type, ...args) {
   }
 
   _inprogress[key] = null
-  store.dispatch(query)
+  dispatcher.dispatch(query)
   method.apply(WebApiClient, query.args)
     .then(
       (result) =>
-        store.dispatch({
+        dispatcher.dispatch({
           ...query,
           result,
           type: success(type)
         }),
       (response) =>
-        store.dispatch({
+        dispatcher.dispatch({
           ...query,
           error,
           type: fails(type)

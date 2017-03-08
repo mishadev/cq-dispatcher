@@ -1,7 +1,7 @@
 <template>
   <div id="app">
   	<write></write>
-	  <read></read>
+	<read></read>
   </div>
 </template>
 

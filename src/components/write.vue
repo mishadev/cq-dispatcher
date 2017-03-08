@@ -1,8 +1,8 @@
 <template>
 	<div class="write">
 		<input type="text" class="input-todo" v-model="todoText"><button class="add" @click="addTodo()">add todo</button>
+		<h3>{{ todos.error }}</h3>
 		<h2>Writable todos</h2>
-		{{ todos.error }}
 		{{ todos.isLoading ? 'Loading...' : '' }}
 		{{ todos.isPosting ? 'Posting...' : '' }}
 		<ul class="todos" v-if="todos.items && todos.items.length > 0">
@@ -33,10 +33,10 @@ export default {
 		toggleTodo (index) {
 			Command(TOGGLE_TODO, index)
 		},
-		addTodo (todoText = this.todoText) {
-			if (!todoText) return
+		addTodo (text = this.todoText) {
+			if (!text) return
 
-			Command(ADD_TODO, todoText)
+			Command(ADD_TODO, text)
 
 			this.todoText = ''
 		},

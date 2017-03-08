@@ -1,4 +1,4 @@
-import dotProp from 'dot-prop'
+import _ from 'lodash'
 
 // to valid and match like `a as x.y.z`
 const re = /^([\w\.-]+)\s+as\s+([\w\.-]+)$/i
@@ -12,10 +12,6 @@ function parseProp(prop) {
 	return {storeProp, realProp}
 }
 
-function deepProp(obj, path){
-	return path.split('.').reduce((o, p) => o[p], obj);
-};
-
 function _bind(Vue, store) {
 	Vue.mixin({
 		created() {
@@ -24,7 +20,7 @@ function _bind(Vue, store) {
 					this._bindProps.forEach(prop => {
 						const {storeProp, realProp} = prop
 						if (realProp && storeProp) {
-							dotProp.set(this, realProp, deepProp(store.getState(), storeProp))
+							_.set(this, realProp, _.get(store.getState(), storeProp))
 						}
 					})
 				}
@@ -41,13 +37,13 @@ function _bind(Vue, store) {
 		this._bindProps = this._bindProps || []
 		prop = parseProp(prop)
 		this._bindProps.push(prop)
-		return deepProp(store.getState(), prop.storeProp)
+		return _.get(store.getState(), prop.storeProp)
 	}
 }
 
-export default class Revue {
-	constructor(Vue, reduxStore) {
-		this.store = reduxStore
+export default class Binder {
+	constructor(Vue, store) {
+		this.store = store
 		_bind(Vue, this.store)
 	}
 	dispatch(...args) {

@@ -15,7 +15,6 @@ const defaultTodos = [
 }]
 
 let idx = 0;
-
 export default {
   [LOAD_TODOS]: () =>
     new Promise((res, rej) => {
@@ -33,7 +32,7 @@ export default {
     new Promise((res, rej) => {
       setTimeout(() => {
 
-        if (idx % 2) {
+        if (idx++ % 2) {
           let serverResponse = {
             data: {
               text,
