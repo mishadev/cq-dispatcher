@@ -1,4 +1,5 @@
-import { success, reject, fails } from './Convention'
-import { CQActions } from './CQActions'
+import { success, rejected, fails } from './Convention'
+import CQActions from './CQActions'
 
-export { success, reject, fails, CQActions }
+export { success, rejected, fails }
+export default CQActions

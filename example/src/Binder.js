@@ -47,7 +47,9 @@ export default class Binder {
 		_bind(Vue, this.store)
 	}
 	dispatch(...args) {
-    console.log(args[0]);
+    if (process.env.NODE_ENV === "development") {
+      console.log(args[0]);
+    }
 		return this.store.dispatch(...args)
 	}
 }

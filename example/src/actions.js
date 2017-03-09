@@ -1,8 +1,13 @@
-import CQActions from '../../src/CQActions'
+import Vue from 'vue'
+import { createStore } from 'redux'
+import CQActions from '../../src'
 
-import dispatcher from './dispatcher'
-import WebApiClient from './clients/WebApiClient'
+import Binder from './Binder'
+import reducer from './reducers'
 
-const actions = new CQActions(dispatcher, WebApiClient)
+import webapi from './clients/webapi'
+
+const actions = new CQActions(
+  new Binder(Vue, createStore(reducer)), webapi)
 
 export default actions

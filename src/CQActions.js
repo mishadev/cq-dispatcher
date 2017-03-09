@@ -1,24 +1,23 @@
 import assert from 'assert'
-import _ from 'lodash'
-import { success, reject, fails } from './Convention'
+import { success, rejected, fails } from './Convention'
 
 export default class CQActions {
   constructor(dispatcher, methods) {
-    this.dispatcher = dispatcher
-    this.methods = methods
+    this._dispatch = dispatcher.dispatch.bind(dispatcher)
+    this._methods = methods
     this._inprogress = {}
   }
   _async(method, action, type) {
-    return new Promise((res, rej) => {
-      method.apply({ res, rej }, action.args)
+    return new Promise((resolve, reject) => {
+      method.apply({ resolve, reject }, action.args)
     })
     .then(
-      (result) => this.dispatcher.dispatch({
+      (result) => this._dispatch({
         ...action,
         result,
         type: success(type)
       }),
-      (error) => this.dispatcher.dispatch({
+      (error) => this._dispatch({
         ...action,
         error,
         type: fails(type)
@@ -26,32 +25,35 @@ export default class CQActions {
     )
   }
   Command (type, ...args) {
-    assert(_.isString(type))
+    assert(typeof type === 'string')
 
     let command = { type, args }
-    this.dispatcher.dispatch(command)
+    this._dispatch(command)
 
-    let method = this.methods[type]
-    if(!_.isFunction(method)) return
+    let method = this._methods[type]
+    if(typeof method !== 'function') return
 
     this._async(method, command, type)
   }
   Query (type, ...args) {
-    assert(_.isString(type))
+    assert(typeof type === 'string')
 
     let query = { type, args }
-    let method = this.methods[type]
+    let method = this._methods[type]
     let key = JSON.stringify(query)
-    if (!_.isFunction(method) || key in this._inprogress) {
-      this.dispatcher.dispatch({
+    if (
+      typeof method !== 'function' ||
+      key in this._inprogress
+    ) {
+      this._dispatch({
         ...query,
-        type: reject(type),
+        type: rejected(type),
       })
       return
     }
     this._inprogress[key] = null
-    this.dispatcher.dispatch(query)
 
+    this._dispatch(query)
     this._async(method, query, type)
   }
 }

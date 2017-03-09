@@ -1,16 +1,25 @@
 {
-  "name": "vueredux",
-  "version": "0.0.1",
-  "description": "Redux binding for Vue.",
+  "name": "cqrs-actions",
+  "version": "1.0.0",
+  "description": "An common query responsibility segregation action creator for 'flux-like' architecture. (Redux as an example)",
+  "main": "./dest/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mishadev/cqrs-actions.git"
+  },
+  "homepage": "https://github.com/mishadev/cqrs-actions#readme",
   "scripts": {
+    "build": "babel ./src --out-dir ./dist",
+    "prepublish": "npm run build",
     "dev:example": "NODE_ENV=development node example/build/dev-server.js",
     "build:example": "NODE_ENV=development node example/build/build.js"
   },
-  "author": "Michael Nakonechny",
+  "keywords": [ "webpack", "flux", "redux", "vue", "CQRS" ],
+  "author": "Mikhailo Nakonechnyi <misha_dev@live.com>",
   "license": "MIT",
   "devDependencies": {
     "autoprefixer": "^6.4.0",
-    "eventsource-polyfill": "^0.9.6",
+    "babel-cli": "^6.0.0",
     "babel-core": "^6.0.0",
     "babel-loader": "^6.0.0",
     "babel-plugin-transform-runtime": "^6.0.0",
@@ -18,12 +27,14 @@
     "babel-preset-stage-2": "^6.0.0",
     "babel-register": "^6.0.0",
     "css-loader": "^0.25.0",
+    "eventsource-polyfill": "^0.9.6",
     "express": "^4.13.3",
     "extract-text-webpack-plugin": "^1.0.1",
     "html-webpack-plugin": "^2.8.1",
     "http-proxy-middleware": "^0.17.2",
     "jsdom": "^7.1.0",
     "json-loader": "^0.5.4",
+    "lodash": "^4.17.0",
     "ora": "^0.3.0",
     "postcss-loader": "^1.3.2",
     "redux": "^3.6.0",
@@ -31,6 +42,7 @@
     "sass-loader": "^4.1.0",
     "shelljs": "^0.7.4",
     "url-loader": "^0.5.7",
+    "vue": "^2.1.0",
     "vue-loader": "^10.0.0",
     "vue-resource": "^1.0.3",
     "vue-router": "^2.1.1",
@@ -40,9 +52,5 @@
     "webpack-dev-middleware": "^1.8.3",
     "webpack-hot-middleware": "^2.12.2",
     "webpack-merge": "^0.14.1"
-  },
-  "dependencies": {
-    "lodash": "^4.17.0",
-    "vue": "^2.1.0"
   }
 }

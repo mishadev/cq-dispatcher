@@ -8,12 +8,6 @@ var webpack = require('webpack')
 var config = require('./config')
 var webpackConfig = require(config.webpackConfigPath)
 
-console.log(
-	'  Tip:\n' +
-	'  Built files are meant to be served over an HTTP server.\n' +
-	'  Opening index.html over file:// should work also.\n'
-)
-
 var spinner = ora('building for production...')
 spinner.start()
 

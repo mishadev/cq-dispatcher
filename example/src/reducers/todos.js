@@ -2,9 +2,9 @@ import {
   ADD_TODO,
   TOGGLE_TODO,
   LOAD_TODOS
-} from '../actions/ActionTypes'
+} from '../ActionTypes'
 
-import { success, reject, fails } from '../../../src/index'
+import { success, fails } from '../../../src'
 
 const _reduce = {
   [LOAD_TODOS]: (state) => {

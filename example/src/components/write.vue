@@ -13,7 +13,7 @@
 
 <script>
 import actions from '../actions'
-import { LOAD_TODOS, TOGGLE_TODO, ADD_TODO } from '../actions/ActionTypes'
+import { LOAD_TODOS, TOGGLE_TODO, ADD_TODO } from '../ActionTypes'
 import { has } from 'lodash'
 
 export default {
