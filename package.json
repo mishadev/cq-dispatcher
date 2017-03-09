@@ -3,9 +3,8 @@
   "version": "0.0.1",
   "description": "Redux binding for Vue.",
   "scripts": {
-    "dev": "NODE_ENV=development node build/dev-server.js",
-    "build-dev": "NODE_ENV=development node build/build.js",
-    "build": "NODE_ENV=production node build/build.js"
+    "dev:example": "NODE_ENV=development node example/build/dev-server.js",
+    "build:example": "NODE_ENV=development node example/build/build.js"
   },
   "author": "Michael Nakonechny",
   "license": "MIT",

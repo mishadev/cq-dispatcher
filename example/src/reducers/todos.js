@@ -4,7 +4,7 @@ import {
   LOAD_TODOS
 } from '../actions/ActionTypes'
 
-import { success, fails } from '../actions/Convention'
+import { success, reject, fails } from '../../../src/index'
 
 const _reduce = {
   [LOAD_TODOS]: (state) => {

@@ -7,12 +7,12 @@ var _configs = {
 		cssOutputFilename: 'css/[name].[contenthash].css',
 		htmlOutputFilename: 'index.html',
 		htmlTemplatePath: 'index.html',
-		faviconPath: 'static/images/favicon.ico',
+		faviconPath: 'example/static/images/favicon.ico',
 		outputPath: path.resolve(__dirname, '../dist/static'),
 		outputPublicPath: '',
 		outputFilename: 'js/[name].js',
 		outputChunkFilename: 'js/[id].js',
-		inlineCss: false,
+		inlineCss: true,
 
 		port: process.env.PORT || 8801,
 		proxyTable: {}
@@ -23,7 +23,7 @@ var _configs = {
 		cssOutputFilename: 'css/[name].[contenthash].css',
 		htmlOutputFilename: '../index.html',
 		htmlTemplatePath: 'index.html',
-		faviconPath: 'static/images/favicon.ico',
+		faviconPath: 'example/static/images/favicon.ico',
 		outputPath: path.resolve(__dirname, '../dist/static'),
 		outputPublicPath: 'static/',
 		outputFilename: 'js/[name].[chunkhash].js',

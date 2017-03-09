@@ -12,8 +12,7 @@
 </template>
 
 <script>
-import Query from '../actions/Query'
-import Command from '../actions/Command'
+import actions from '../actions'
 import { LOAD_TODOS, TOGGLE_TODO, ADD_TODO } from '../actions/ActionTypes'
 import { has } from 'lodash'
 
@@ -26,17 +25,17 @@ export default {
 	},
 	mounted () {
 		if (!has(this.todos, 'items')) {
-			Query(LOAD_TODOS)
+			actions.Query(LOAD_TODOS)
 		}
 	},
 	methods: {
 		toggleTodo (index) {
-			Command(TOGGLE_TODO, index)
+			actions.Command(TOGGLE_TODO, index)
 		},
 		addTodo (text = this.todoText) {
 			if (!text) return
 
-			Command(ADD_TODO, text)
+			actions.Command(ADD_TODO, text)
 
 			this.todoText = ''
 		},
