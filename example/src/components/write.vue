@@ -20,7 +20,7 @@ export default {
 	data () {
 		return {
 			todoText: '',
-			todos: this.$bind('todos')
+			todos: this.$select('todos')
 		}
 	},
 	mounted () {

@@ -1,7 +1,7 @@
 import assert from 'assert'
 import { success, rejected, fails } from './Convention'
 
-export default class CQActions {
+export default class CQRSActions {
   constructor(dispatcher, methods) {
     this._dispatch = dispatcher.dispatch.bind(dispatcher)
     this._methods = methods

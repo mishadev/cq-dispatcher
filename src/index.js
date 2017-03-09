@@ -1,5 +1,5 @@
 import { success, rejected, fails } from './Convention'
-import CQActions from './CQActions'
+import CQRSActions from './CQRSActions'
 
 export { success, rejected, fails }
-export default CQActions
+export default CQRSActions

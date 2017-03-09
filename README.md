@@ -17,13 +17,13 @@ npm install --save-dev cqrs-actions
 // actions.js
 import Vue from 'vue'
 import { createStore } from 'redux'
-import CQActions from 'cqrs-actions'
+import Revue from 'revue'
+import CQRSActions from 'cqrs-actions'
 
-import Binder from './Binder'
 import reducer from './reducers'
 
-const actions = new CQActions(
-	new Binder(Vue, createStore(reducer)),
+const actions = new CQRSActions(
+	new Revue(Vue, createStore(reducer)),
 	{
 		'LOAD': function () {
 			ajaxlib.get('http://example.com')

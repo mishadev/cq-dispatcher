@@ -21,7 +21,6 @@ export default {
         }],
         error: null
       }
-
       this.resolve(serverResponse.data)
 
     }, 2000)

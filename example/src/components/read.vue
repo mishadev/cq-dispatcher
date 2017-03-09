@@ -11,7 +11,7 @@
   export default {
     data () {
       return {
-        todos: this.$bind('todos')
+        todos: this.$select('todos')
       }
     }
   }
