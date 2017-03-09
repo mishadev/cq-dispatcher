@@ -25,8 +25,8 @@ import reducer from './reducers'
 const actions = new CQRSActions(
 	new Revue(Vue, createStore(reducer)),
 	{
-		'LOAD': function () {
-			ajaxlib.get('http://example.com')
+		'LOAD': function (next_page_id) {
+			ajaxlib.get('http://example.com', { next_page_id })
 				.then(this.resolve, this.reject)
 		}
 	}
@@ -40,12 +40,12 @@ import actions from '../actions'
 export default {
 	data () {
 		return {
-			items: this.$bind('reducer_name as items')
+			items: this.$select('reducer_name as items')
 		}
 	},
 	mounted () {
 		if (!this.items) {
-			actions.Query('LOAD')
+			actions.Query('LOAD', 'next_page_id')
 		}
 	},
 	methods: {
