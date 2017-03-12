@@ -4,11 +4,17 @@ var webpack = require('webpack')
 var config = require('./config')
 var utils = require('./utils')
 
+var HtmlWebpackPlugin = require('html-webpack-plugin')
+var ExtractTextPlugin = require('extract-text-webpack-plugin')
+
 var projectRoot = path.resolve(__dirname, '../')
 
 module.exports = {
 	entry: {
-		app: projectRoot + '/src/index.js'
+		app: [
+      projectRoot + '/src/index.js',
+      config.useHotreplace && (projectRoot + '/build/dev-client')
+    ].filter(Boolean)
 	},
 	output: {
 		path: config.outputPath,
@@ -75,7 +81,19 @@ module.exports = {
 		`,
 	},
 	postcss: utils.getPostCssPlugins(),
+	devtool: '#eval-source-map',
 	plugins: [
-		new webpack.DefinePlugin(config.replaceConfig)
-	]
+		new webpack.DefinePlugin(config.replaceConfig),
+		new webpack.optimize.OccurrenceOrderPlugin(),
+		config.useHotreplace && new webpack.HotModuleReplacementPlugin(),
+		new webpack.NoErrorsPlugin(),
+		new ExtractTextPlugin(config.cssOutputFilename),
+		// https://github.com/ampedandwired/html-webpack-plugin
+		new HtmlWebpackPlugin({
+			filename: config.htmlOutputFilename,
+			template: config.htmlTemplatePath,
+			favicon: config.faviconPath,
+			inject: true
+		})
+	].filter(Boolean)
 }

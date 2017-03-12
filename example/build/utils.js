@@ -15,7 +15,7 @@ var _getRelativePublicPath = function(filename) {
 
 var _extract = function(loaders) {
 	var loader = config.inlineCss ?
-		'style-loader!' + loaders :
+		'vue-style-loader!' + loaders :
 		// NOTE: publicPath option use to resolve relative url() is css
 		// it's relative to css output filename
 		ExtractTextPlugin.extract(loaders,
