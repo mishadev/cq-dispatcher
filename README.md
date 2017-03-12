@@ -14,6 +14,30 @@ npm install --save-dev cqrs-actions
 ## Usage
 
 ```js
+//reducers.js
+import { combineReducers } from 'redux'
+import { success, fails } from 'cqrs-actions'
+
+let reducer_name = {
+  [LOAD]: (state, action) => {
+	  //load begin
+  },
+  [success(LOAD)]: (state, action) => {
+	  //load success
+  },
+  [fails(LOAD)]: (state, action) => {
+	  //load fails
+  },
+  [TOGGLE]: (state, action) => {
+	  //toggle
+  }
+}
+
+export default combineReducers({
+  reducer_name
+})
+
+
 // actions.js
 import Vue from 'vue'
 import { createStore } from 'redux'
@@ -22,16 +46,18 @@ import CQRSActions from 'cqrs-actions'
 
 import reducer from './reducers'
 
-const actions = new CQRSActions(
-	new Revue(Vue, createStore(reducer)),
-	{
-		'LOAD': function (next_page_id) {
-			ajaxlib.get('http://example.com', { next_page_id })
-				.then(this.resolve, this.reject)
-		}
+let webapi = {
+	'LOAD': function (next_page_id) {
+		ajaxlib.get('http://example.com', { next_page_id })
+			.then(this.resolve, this.reject)
 	}
-)
+}
+
+const actions = new CQRSActions(
+	new Revue(Vue, createStore(reducer)), webapi)
+
 export default actions
+
 
 //vue
 <script>
