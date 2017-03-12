@@ -19,16 +19,16 @@ import { combineReducers } from 'redux'
 import { success, fails } from 'cqrs-actions'
 
 let reducer_name = {
-  [LOAD]: (state, action) => {
+  ['LOAD']: (state, action) => {
 	  //load begin
   },
-  [success(LOAD)]: (state, action) => {
+  [success('LOAD')]: (state, action) => {
 	  //load success
   },
-  [fails(LOAD)]: (state, action) => {
+  [fails('LOAD')]: (state, action) => {
 	  //load fails
   },
-  [TOGGLE]: (state, action) => {
+  ['TOGGLE']: (state, action) => {
 	  //toggle
   }
 }
