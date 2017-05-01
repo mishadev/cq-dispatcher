@@ -1,4 +1,4 @@
-# cqrs-actions
+# cq-dispatcher
 
 > Flux command query action creator.
 
@@ -8,7 +8,7 @@
 ## Install
 
 ```sh
-npm install --save-dev cqrs-actions
+npm install --save-dev cq-dispatcher
 ```
 
 ## Usage
@@ -16,7 +16,7 @@ npm install --save-dev cqrs-actions
 ```js
 //reducers.js
 import { combineReducers } from 'redux'
-import { success, fails } from 'cqrs-actions'
+import { success, fails } from 'cq-dispatcher'
 
 let reducer_name = {
   ['LOAD']: (state, action) => {
@@ -42,7 +42,7 @@ export default combineReducers({
 import Vue from 'vue'
 import { createStore } from 'redux'
 import Revue from 'revue'
-import CQRSActions from 'cqrs-actions'
+import CQDispatcher from 'cq-dispatcher'
 
 import reducer from './reducers'
 
@@ -53,7 +53,7 @@ let webapi = {
 	}
 }
 
-const actions = new CQRSActions(
+const actions = new CQDispatcher(
 	new Revue(Vue, createStore(reducer)), webapi)
 
 export default actions

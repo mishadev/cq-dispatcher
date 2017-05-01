@@ -1,13 +1,13 @@
 import Vue from 'vue'
 import { createStore } from 'redux'
-import CQRSActions from '../../src'
+import CQDispatcher from '../../src'
 
 import Revue from 'revue'
 import reducer from './reducers'
 
 import webapi from './clients/webapi'
 
-const actions = new CQRSActions(
+const dispatcher = new CQDispatcher(
   new Revue(Vue, createStore(reducer)), webapi)
 
-export default actions
+export default dispatcher

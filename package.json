@@ -1,20 +1,20 @@
 {
-  "name": "cqrs-actions",
+  "name": "qc-dispatcher",
   "version": "1.1.2",
   "description": "An common query responsibility segregation action creator for 'flux-like' architecture. (Redux as an example)",
   "main": "./dist/index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mishadev/cqrs-actions.git"
+    "url": "git+https://github.com/mishadev/cq-dispatcher.git"
   },
-  "homepage": "https://github.com/mishadev/cqrs-actions#readme",
   "scripts": {
+  "homepage": "https://github.com/mishadev/cq-dispatcher#readme",
     "build": "babel ./src --out-dir ./dist",
     "prepublish": "npm run build",
     "dev:example": "NODE_ENV=development node example/build/dev-server.js",
     "build:example": "NODE_ENV=development node example/build/build.js"
   },
-  "keywords": [ "webpack", "flux", "redux", "vue", "CQRS" ],
+  "keywords": [ "webpack", "flux", "redux", "vue", "cqrs" ],
   "author": "Mikhailo Nakonechnyi <misha_dev@live.com>",
   "license": "MIT",
   "devDependencies": {
