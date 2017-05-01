@@ -8,10 +8,8 @@ export default class CQDispatcher {
     this._inprogress = {}
   }
   _async(method, action, type) {
-    return new Promise((resolve, reject) => {
-      method.apply({ resolve, reject }, action.args)
-    })
-    .then(
+    const promise = method(...action.args)
+    return promise.then(
       (result) => this._dispatch({
         ...action,
         result,
