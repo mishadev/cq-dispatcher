@@ -7,15 +7,19 @@ export default class CQDispatcher {
     this._methods = methods
     this._inprogress = {}
   }
-  _async(method, action, type) {
+  _async(method, action, type, key) {
     const promise = method(...action.args)
-    return promise.then(
-      (result) => this._dispatch({
+    return promise
+      .then((result) => {
+        delete this._inprogress[key]
+        return result
+      })
+      .then((result) => this._dispatch({
         ...action,
         result,
         type: success(type)
-      }),
-      (error) => this._dispatch({
+      }))
+      .catch((error) => this._dispatch({
         ...action,
         error,
         type: fails(type)
@@ -52,6 +56,6 @@ export default class CQDispatcher {
     this._inprogress[key] = null
 
     this._dispatch(query)
-    this._async(method, query, type)
+    this._async(method, query, type, key)
   }
 }
