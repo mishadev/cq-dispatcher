@@ -10,21 +10,22 @@ export default class CQDispatcher {
   _async(method, action, type, key) {
     const promise = method(...action.args)
     return promise
-      .then((result) => {
+      .then(result => {
         delete this._inprogress[key]
-        return result
+        return this._dispatch({
+          ...action,
+          result,
+          type: success(type)
+        })
       })
-      .then((result) => this._dispatch({
-        ...action,
-        result,
-        type: success(type)
-      }))
-      .catch((error) => this._dispatch({
-        ...action,
-        error,
-        type: fails(type)
+      .catch(error => {
+        delete this._inprogress[key]
+        this._dispatch({
+          ...action,
+          error,
+          type: fails(type)
+        })
       })
-    )
   }
   Command (type, ...args) {
     assert(typeof type === 'string')
